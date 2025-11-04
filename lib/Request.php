@@ -93,6 +93,14 @@ class Request
      * @param string $method
      * @param string $url
      */
+
+    /**
+     * Body content type.
+     *
+     * @var string
+     */
+    private $bodycontenttype;
+
     public function __construct(Client $client, $method, $url)
     {
         $this->client = $client;
