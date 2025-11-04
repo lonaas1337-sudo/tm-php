@@ -1,5 +1,7 @@
 # tm-php - PHP API library for Ticketmatic
 
+This is a fork of the official ticketmatic PHP SDK with the goal to make it compatible with 8.2. Feel free to open an issue if you encounter any bugs.
+
 [![Build Status](https://travis-ci.org/ticketmatic/tm-php.svg?branch=master)](https://travis-ci.org/ticketmatic/tm-php)
 
 This library provides PHP bindings for the [Ticketmatic](https://www.ticketmatic.com/) API.
