@@ -16,7 +16,9 @@
             "email": "lonaas1337@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "php": ">=8.2"
+    },
     "autoload": {
         "psr-4": {
             "Ticketmatic\\": "lib/"
