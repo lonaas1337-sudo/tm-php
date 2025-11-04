@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright (C) 2014-2017 by Ticketmatic BVBA <developers@ticketmatic.com>
+ * Copyright (C) 2014-2017 by Ticketmatic BVBA <developers@ticketmatic.com>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +24,13 @@
  * @license     MIT X11 http://opensource.org/licenses/MIT
  * @author      Ticketmatic BVBA <developers@ticketmatic.com>
  * @copyright   Ticketmatic BVBA
- * @link        https://www.ticketmatic.com/
+ *
+ * @see        https://www.ticketmatic.com/
  */
 
 namespace Ticketmatic\Model;
 
+use jsonSerializable;
 use Ticketmatic\Json;
 
 /**
@@ -38,28 +41,27 @@ use Ticketmatic\Json;
  * Full documentation can be found in the Ticketmatic Help Center
  * (https://apps.ticketmatic.com/#/knowledgebase/api/types/QueryResult).
  */
-class QueryResult implements \jsonSerializable
+class QueryResult implements jsonSerializable
 {
     /**
-     * Create a new QueryResult
-     *
-     * @param array $data
+     * Create a new QueryResult.
      */
-    public function __construct(array $data = array()) {
+    public function __construct(array $data = [])
+    {
         foreach ($data as $key => $value) {
             $this->$key = $value;
         }
     }
 
     /**
-     * The number of rows in the result
+     * The number of rows in the result.
      *
      * @var int
      */
     public $nbrofresults;
 
     /**
-     * The actual resulting rows
+     * The actual resulting rows.
      *
      * @var object[][]
      */
@@ -70,17 +72,18 @@ class QueryResult implements \jsonSerializable
      *
      * @param object $obj
      *
-     * @return \Ticketmatic\Model\QueryResult
+     * @return QueryResult
      */
-    public static function fromJson($obj) {
+    public static function fromJson($obj)
+    {
         if ($obj === null) {
             return null;
         }
 
-        return new QueryResult(array(
-            "nbrofresults" => isset($obj->nbrofresults) ? $obj->nbrofresults : null,
-            "results" => isset($obj->results) ? $obj->results : null,
-        ));
+        return new QueryResult([
+            'nbrofresults' => isset($obj->nbrofresults) ? $obj->nbrofresults : null,
+            'results'      => isset($obj->results) ? $obj->results : null,
+        ]);
     }
 
     /**
@@ -88,13 +91,14 @@ class QueryResult implements \jsonSerializable
      *
      * @return array
      */
-    public function jsonSerialize() {
-        $result = array();
+    public function jsonSerialize(): mixed
+    {
+        $result = [];
         if (!is_null($this->nbrofresults)) {
-            $result["nbrofresults"] = intval($this->nbrofresults);
+            $result['nbrofresults'] = intval($this->nbrofresults);
         }
         if (!is_null($this->results)) {
-            $result["results"] = $this->results;
+            $result['results'] = $this->results;
         }
 
         return $result;
