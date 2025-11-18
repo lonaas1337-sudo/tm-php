@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright (C) 2014-2017 by Ticketmatic BVBA <developers@ticketmatic.com>
+ * Copyright (C) 2014-2017 by Ticketmatic BVBA <developers@ticketmatic.com>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +24,13 @@
  * @license     MIT X11 http://opensource.org/licenses/MIT
  * @author      Ticketmatic BVBA <developers@ticketmatic.com>
  * @copyright   Ticketmatic BVBA
- * @link        https://www.ticketmatic.com/
+ *
+ * @see        https://www.ticketmatic.com/
  */
 
 namespace Ticketmatic\Model;
 
+use jsonSerializable;
 use Ticketmatic\Json;
 
 /**
@@ -38,35 +41,34 @@ use Ticketmatic\Json;
  * Full documentation can be found in the Ticketmatic Help Center
  * (https://apps.ticketmatic.com/#/knowledgebase/api/types/QueryRequest).
  */
-class QueryRequest implements \jsonSerializable
+class QueryRequest implements jsonSerializable
 {
     /**
-     * Create a new QueryRequest
-     *
-     * @param array $data
+     * Create a new QueryRequest.
      */
-    public function __construct(array $data = array()) {
+    public function __construct(array $data = [])
+    {
         foreach ($data as $key => $value) {
             $this->$key = $value;
         }
     }
 
     /**
-     * Optional limit for the result. Default 100
+     * Optional limit for the result. Default 100.
      *
      * @var int
      */
     public $limit;
 
     /**
-     * Optional offset for the result. Default 0
+     * Optional offset for the result. Default 0.
      *
      * @var int
      */
     public $offset;
 
     /**
-     * Actual query to execute
+     * Actual query to execute.
      *
      * @var string
      */
@@ -77,18 +79,19 @@ class QueryRequest implements \jsonSerializable
      *
      * @param object $obj
      *
-     * @return \Ticketmatic\Model\QueryRequest
+     * @return QueryRequest
      */
-    public static function fromJson($obj) {
+    public static function fromJson($obj)
+    {
         if ($obj === null) {
             return null;
         }
 
-        return new QueryRequest(array(
-            "limit" => isset($obj->limit) ? $obj->limit : null,
-            "offset" => isset($obj->offset) ? $obj->offset : null,
-            "query" => isset($obj->query) ? $obj->query : null,
-        ));
+        return new QueryRequest([
+            'limit'  => isset($obj->limit) ? $obj->limit : null,
+            'offset' => isset($obj->offset) ? $obj->offset : null,
+            'query'  => isset($obj->query) ? $obj->query : null,
+        ]);
     }
 
     /**
@@ -96,16 +99,17 @@ class QueryRequest implements \jsonSerializable
      *
      * @return array
      */
-    public function jsonSerialize() {
-        $result = array();
+    public function jsonSerialize()
+    {
+        $result = [];
         if (!is_null($this->limit)) {
-            $result["limit"] = intval($this->limit);
+            $result['limit'] = intval($this->limit);
         }
         if (!is_null($this->offset)) {
-            $result["offset"] = intval($this->offset);
+            $result['offset'] = intval($this->offset);
         }
         if (!is_null($this->query)) {
-            $result["query"] = strval($this->query);
+            $result['query'] = strval($this->query);
         }
 
         return $result;
