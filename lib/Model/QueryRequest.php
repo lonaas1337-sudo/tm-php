@@ -99,7 +99,7 @@ class QueryRequest implements jsonSerializable
      *
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $result = [];
         if (!is_null($this->limit)) {
